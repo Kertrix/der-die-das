@@ -1,29 +1,25 @@
-import { getGenderGermanWord } from "german-words";
 import words from "german-words-dict/dist/words.json";
 import { useEffect, useState } from "react";
 import { Input } from "./components/ui/input";
+import { getGenderGermanWord } from "./lib/utils";
 
 function App() {
   const [word, setWord] = useState<string>("");
-  const [genre, setGenre] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const genreMap: { [key: string]: string } = {
+    M: "Der",
+    F: "Die",
+    N: "Das",
+  };
 
   useEffect(() => {
     if (word) {
-      const matchingWords = Object.keys(words).filter((w) =>
-        w.toLowerCase().startsWith(word.toLowerCase())
-      );
+      const matchingWords = Object.keys(words)
+        .filter((w) => w.toLowerCase().startsWith(word.toLowerCase()))
+        .slice(0, 10);
       setSuggestions(matchingWords);
-      if (matchingWords.length > 0) {
-        // @ts-expect-error Their types are weird
-        const genre = getGenderGermanWord(null, words, matchingWords[0]);
-        setGenre(genre);
-      } else {
-        setGenre("Unknown");
-      }
     } else {
       setSuggestions([]);
-      setGenre("");
     }
   }, [word]);
 
@@ -38,14 +34,12 @@ function App() {
       {suggestions.length > 0 && (
         <ul>
           {suggestions.map((suggestion, index) => (
-            <li key={index}>{suggestion}</li>
+            <li key={index}>
+              {suggestion} -{" "}
+              {genreMap[getGenderGermanWord(suggestion)!] || "No genre found"}
+            </li>
           ))}
         </ul>
-      )}
-      {genre && (
-        <p>
-          The genre of "{word}" is: {genre}
-        </p>
       )}
     </>
   );

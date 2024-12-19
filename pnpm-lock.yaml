@@ -11,9 +11,6 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
-  german-words:
-    specifier: ^5.3.1
-    version: 5.3.1
   german-words-dict:
     specifier: ^3.3.1
     version: 3.3.1
@@ -1457,10 +1454,6 @@ packages:
 
   /german-words-dict@3.3.1:
     resolution: {integrity: sha512-ai+Q5g+5DYNirA6levxztTtqwFKGEPbhjeD2W2xvsRkAosG7PxwLBlTLgtQYX3Daktb/c3xebhWHIFvyUOK1iw==}
-    dev: false
-
-  /german-words@5.3.1:
-    resolution: {integrity: sha512-1cA35eLAGlS+X2F8lbDDFCxRc6Y61rj8KLY11JRUAxxRfkmQxmPYKXSycJX9mMiUsbLEFccIDELGwFida58F7Q==}
     dev: false
 
   /glob-parent@5.1.2:

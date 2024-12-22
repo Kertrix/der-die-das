@@ -19,7 +19,7 @@ function App() {
     if (word) {
       const matchingWords = Object.keys(words)
         .filter((w) => w.toLowerCase().startsWith(word.toLowerCase()))
-        .slice(0, 10);
+        .slice(0, 100);
       setSuggestions(matchingWords);
     } else {
       setSuggestions([]);
@@ -27,7 +27,7 @@ function App() {
   }, [word]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-50 font-[Inter] mb-4">
+    <div className="flex flex-col items-center min-h-screen font-[Inter] pb-4">
       <div className="container flex flex-col max-w-screen-xl">
         <div
           className="flex flex-col min-h-[480px] items-center justify-center bg-cover bg-center bg-no-repeat text-white rounded-3xl p-4 mt-4"
@@ -53,6 +53,9 @@ function App() {
 
         {suggestions.length > 0 ? (
           <ul className="w-full mt-4 border rounded-xl text-lg">
+            <li className="p-4 flex items-center justify-between border-b text-sm">
+              {suggestions.length} Wort(e) gefunden
+            </li>
             {suggestions.map((suggestion, index) => {
               const genderKey = getGenderGermanWord(suggestion);
               const gender = genderKey ? genderMap[genderKey] : undefined;
@@ -98,6 +101,9 @@ function App() {
           word.length > 0 && <p className="mt-4">Kein Wort gefunden</p>
         )}
       </div>
+      <footer className="mt-auto py-4 text-center">
+        <p>Made with ❤️ by Kertrix</p>
+      </footer>
     </div>
   );
 }
